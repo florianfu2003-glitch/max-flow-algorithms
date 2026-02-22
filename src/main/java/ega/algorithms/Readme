@@ -1,0 +1,99 @@
+# max-flow-algorithms
+
+A Java implementation and visualization framework for the **Maximum Flow** problem, featuring multiple classical algorithms, a randomized testbed, and an interactive Swing-based GUI for step-by-step inspection.
+
+## Features
+
+- **Multiple max-flow algorithms** implemented on a shared graph core:
+  - **Ford–Fulkerson** (`ega.algorithms.FordFulkerson`)
+  - **Edmonds–Karp** (`ega.algorithms.EdmondsKarp`)
+  - **Dinic** (`ega.algorithms.Dinic`)
+  - **Goldberg–Tarjan (Push–Relabel)** (`ega.algorithms.GoldbergTarjan`)
+- **Interactive GUI** for visualization and algorithm playback:
+  - Step-by-step execution / auto-play
+  - Adjustable playback speed
+  - Random graph generation from the UI
+  - Export test reports/logs to `.txt`
+- **Randomized testbed** for batch experiments and consistency checks (`ega.testbed.TestEnvironment`)
+- **Flow validation** utilities (`ega.core.FlowValidators`) including:
+  - Capacity constraints
+  - Flow conservation
+  - Additional sanity checks on the final result
+
+## Project Structure
+src/main/java/ega
+├── algorithms # Max-flow algorithms (Dinic, Edmonds-Karp, Push-Relabel, ...)
+├── core # Graph/Edge model + flow validation utilities
+├── generator # Random graph/instance generator
+├── gui # Swing GUI (main window + canvas renderer)
+├── gui/vis # Visualization events/frames (e.g., push/relabel/cut/path)
+└── testbed # CLI runner + batch test environment
+
+
+## Requirements
+
+- Java (recommended: 8+)
+- Maven (project is built as a Maven project; see `pom.xml`)
+
+## Build
+
+```bash
+mvn clean package
+
+##Run
+
+This project provides two entry points:
+
+1) GUI (Visualization Tool)
+
+Main class: ega.gui.MainWindow
+
+Option A (recommended): run from IntelliJ
+
+Open/import as a Maven project
+
+Run ega.gui.MainWindow
+
+Option B: run from command line (after mvn clean package)
+java -cp target/classes ega.gui.MainWindow
+
+2) CLI Testbed (Batch Runner)
+
+Main class: ega.testbed.Main
+java -cp target/classes ega.testbed.Main --help
+
+Examples (as supported by the argument parser in ega.testbed.Main):
+# Default-like batch run (instances=5, n=12, cap=50, seed=123)
+java -cp target/classes ega.testbed.Main --mode=batch --instances=5 --n=12 --cap=50 --seed=123
+
+# Small demo run (same configuration as GUI quick test)
+java -cp target/classes ega.testbed.Main --mode=small
+
+# Larger run (same configuration as GUI full test)
+java -cp target/classes ega.testbed.Main --mode=big --seed=2025
+
+Notes on Correctness
+
+The testbed runs each algorithm on independent clones of the same generated input graph and validates the produced flows using ega.core.FlowValidators. This helps detect implementation bugs and ensures consistent max-flow values across different algorithms.
+
+Algorithm Overview (High Level)
+
+Ford–Fulkerson: augmenting paths in the residual network (depends on path selection).
+
+Edmonds–Karp: Ford–Fulkerson using BFS for shortest augmenting paths; polynomial bound.
+
+Dinic: level graph + blocking flows; typically fast in practice.
+
+Goldberg–Tarjan (Push–Relabel): maintains preflow and node labels; efficient on many instances.
+
+(If you want, you can add precise complexity statements here.)
+
+License
+
+Choose one:
+
+MIT (recommended for an open portfolio project)
+
+Apache-2.0
+
+Or keep "All rights reserved"
