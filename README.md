@@ -10,8 +10,6 @@ A Java (Maven) project that implements multiple classical **maximum s–t flow**
 - [Requirements](#requirements)
 - [Build](#build)
 - [Run](#run)
-  - [GUI (Visualization)](#gui-visualization)
-  - [CLI (Testbed)](#cli-testbed)
 - [Generator & Validation](#generator--validation)
 - [Notes on Graph Representation](#notes-on-graph-representation)
 - [License](#license)
@@ -66,63 +64,20 @@ src/main/java/ega
 mvn clean package
 ```
 
-This will create a JAR under target/ (by default: target/EGA-1.0-SNAPSHOT.jar with your current pom.xml).
+This creates the project artifact under (e.g. ).target/target/EGA-1.0-SNAPSHOT.jar
 
 ## Run
-### GUI (Visualization)
+### IntelliJ IDEA (recommended)
+Open the project in IntelliJ.
 
-Main class: ega.gui.MainWindow
+Import as a Maven project (IntelliJ usually detects this automatically).
 
-Option A (run from compiled classes):
+Run one of the main classes:
 
-```bash
-mvn clean compile
-java -cp target/classes ega.gui.MainWindow
-```
+GUI: `ega.gui.MainWindow`
 
-Option B (run from the built JAR):
+CLI: `ega.testbed.Main`
 
-```bash
-mvn clean package
-java -cp target/EGA-1.0-SNAPSHOT.jar ega.gui.MainWindow
-```
-
-### CLI (Testbed)
-
-Main class: ega.testbed.Main
-
-Help:
-
-```bash
-java -cp target/EGA-1.0-SNAPSHOT.jar ega.testbed.Main --help
-```
-
-Supported options (from the code):
-
-- `--mode=<small|batch|big>` (default: `batch`)
-- `--instances=<int>` (batch mode only; default: `5`)
-- `--n=<int>` (batch mode only; default: `12`)
-- `--cap=<int>` (batch mode only; default: `50`)
-- `--seed=<long>` (default: `123`; if omitted uses `System.nanoTime()`)
-- `--help`
-
-## Examples:
-
-### Default-like batch run (5 instances, n=12, cap=50, seed=123)
-
-```bash
-java -cp target/EGA-1.0-SNAPSHOT.jar ega.testbed.Main --mode=batch --instances=5 --n=12 --cap=50 --seed=123
-```
-
-### Small demo run (same idea as GUI quick test preset)
-```bash
-java -cp target/EGA-1.0-SNAPSHOT.jar ega.testbed.Main --mode=small
-```
-
-### Larger run
-```bash
-java -cp target/EGA-1.0-SNAPSHOT.jar ega.testbed.Main --mode=big --seed=2025
-```
 
 ## Generator & Validation
 ### Instance Generator
@@ -171,4 +126,22 @@ This design allows all algorithms to update residual capacities in-place.
 
 ## License
 
-Add a license that matches your intent (e.g., MIT). If omitted, the default is “All rights reserved”.
+Copyright (c) 2026 Bo Fu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
