@@ -12,6 +12,7 @@ A Java (Maven) project that implements multiple classical **maximum s–t flow**
 - [Run](#run)
 - [Generator & Validation](#generator--validation)
 - [Notes on Graph Representation](#notes-on-graph-representation)
+- [Screenshots](#screenshots)
 - [License](#license)
 
 ## Features
@@ -30,10 +31,10 @@ A Java (Maven) project that implements multiple classical **maximum s–t flow**
 
 Located in `src/main/java/ega/algorithms`:
 
-- **Ford–Fulkerson** (DFS augmenting paths) — `FordFulkerson`
-- **Edmonds–Karp** (BFS augmenting paths) — `EdmondsKarp`
-- **Dinic** (level graph + blocking flow) — `Dinic`
-- **Goldberg–Tarjan (Push–Relabel)** — `GoldbergTarjan`
+- **Ford–Fulkerson**: repeatedly finds an s–t augmenting path (DFS) and augments flow along it until no path remains.
+- **Edmonds–Karp**: Ford–Fulkerson with BFS augmenting paths (shortest in number of edges), giving a polynomial-time bound.
+- **Dinic**: builds a level graph via BFS and sends blocking flow with DFS pushes; repeats until the sink becomes unreachable.
+- **Goldberg–Tarjan (Push–Relabel)**: maintains a preflow and vertex labels, performing local push and relabel operations until all excess is discharged.
 
 ## Project Structure
 
@@ -64,7 +65,7 @@ src/main/java/ega
 mvn clean package
 ```
 
-This creates the project artifact under (e.g. ).target/target/EGA-1.0-SNAPSHOT.jar
+“Build (optional)” + “Tested in IntelliJ; command line build should work with Maven.”
 
 ## Run
 ### IntelliJ IDEA (recommended)
@@ -123,6 +124,25 @@ original forward edges (`origCap > 0`)
 pure residual reverse edges (`origCap == 0`)
 
 This design allows all algorithms to update residual capacities in-place.
+
+
+
+## Screenshots
+<img width="1980" height="1492" alt="image" src="https://github.com/user-attachments/assets/d25b1aca-8be3-4d86-a65e-580d38c19049" />
+
+### caption
+Main GUI of the Max-Flow Visualization Tool: select an algorithm, generate a random planar-ish instance, and step through the execution with playback controls while the graph and event log update in real time.
+
+<img width="1972" height="1488" alt="image" src="https://github.com/user-attachments/assets/dbfb3b35-9ca0-49a0-86ed-3d51a7b06022" />
+
+### caption
+Push–Relabel (Goldberg–Tarjan) visualization: the highlighted vertex (orange ring) is the current active node to relabel, and the purple dashed edges indicate the current saturated s–t cut.
+
+<img width="1968" height="1486" alt="image" src="https://github.com/user-attachments/assets/e52d6198-006a-4792-b8a5-46e28c9e6397" />
+
+### caption
+Dinic visualization: the highlighted path indicates the current augmenting path / blocking-flow push in the level graph; edge labels show flow/capacity updates for this step.
+
 
 ## License
 
